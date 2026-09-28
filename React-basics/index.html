@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <!-- <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script> -->
+  </head>
+  <body>
+    <div id="root">
+      <!-- <h1>Hello React</h1> -->
+
+      <!-- <h1 id="content">hello</h1>
+      <button id="change">change</button> -->
+    </div>
+
+    <script src="react.development.js"></script>
+    <script src="react-dom.development.js"></script>
+
+    <script>
+      //   const heading = document.createElement("h1"); // <h1></h1>
+      //   heading.textContent = "Hello React developers"; // <h1> Hello React </h1>
+
+      //   const root = document.getElementById("root");
+      //   root.appendChild(heading);
+
+      //   const content = document.getElementById("content");
+      //   const change = document.getElementById("change");
+
+      //   change.addEventListener("click", () => {
+      //     content.textContent = "Hello Developer!!!!";
+      //   });
+
+      const ReactHeadingElement = React.createElement(
+        "h1",
+        { class: "heading" },
+        "Hello React Developer...❤️❤️",
+      ); // <h1>Hello React Developer...</h1>
+
+      const reactRoot = ReactDOM.createRoot(document.getElementById("root"));
+      reactRoot.render(ReactHeadingElement);
+    </script>
+  </body>
+</html>
