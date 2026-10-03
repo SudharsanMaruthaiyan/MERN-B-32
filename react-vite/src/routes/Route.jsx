@@ -5,6 +5,8 @@ import Counter from "../pages/Counter";
 import ProductDetailPage from "../pages/ProductDetailPage";
 import ErrorPage from "../pages/ErrorPage";
 import Comment from "../pages/Comment";
+import Contact from "../pages/Contact/Contact";
+import ImageCom from "../pages/ImageCom/ImageCom";
 
 const Route = createBrowserRouter([
   {
@@ -22,6 +24,14 @@ const Route = createBrowserRouter([
       {
         path: "/counter",
         element: <Counter />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
+      },
+      {
+        path: "/image",
+        element: <ImageCom />,
       },
       {
         path: "/productDetail/:productId", // params => object { productId: 123 }
