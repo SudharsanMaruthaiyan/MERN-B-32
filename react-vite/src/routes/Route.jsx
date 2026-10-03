@@ -9,6 +9,7 @@ import Comment from "../pages/Comment";
 import ImageCom from "../pages/ImageCom/ImageCom";
 import { lazy, Suspense } from "react";
 import ComponentA from "../pages/props/ComponentA";
+import Expensive from "../pages/Expensive";
 
 const ProductDetail = lazy(() => import("../pages/ProductDetailPage"));
 const Contact = lazy(() => import("../pages/Contact/Contact"));
@@ -41,6 +42,10 @@ const Route = createBrowserRouter([
       {
         path: "/props",
         element: <ComponentA />,
+      },
+      {
+        path: "/expensive",
+        element: <Expensive />,
       },
       {
         path: "/productDetail/:productId",
