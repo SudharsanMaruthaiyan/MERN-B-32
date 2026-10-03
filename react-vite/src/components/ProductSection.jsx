@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import ProductDetailPage from "../pages/ProductDetailPage";
 import { Link } from "react-router-dom";
+import useFetchProductData from "../hooks/useFetchProductData";
 
 export const ProductCard = (props) => {
   return (
@@ -233,47 +234,53 @@ export const ProductCard = (props) => {
   );
 };
 
-export const ProductSection = () => {
-  const [ProductData, setProductData] = useState([]);
-
-  const fetchData = async () => {
-    try {
-      const res = await fetch("https://dummyjson.com/products");
-      const product = await res.json();
-      setProductData(product.products);
-    } catch (error) {
-      console.log("Fetchdata error", error);
-    }
+const ProductCardWithBrand = (Component) => {
+  // madifiy with extra fetures
+  const NewComponent = (props) => {
+    return (
+      <div>
+        <h1 className=" text-white">{props.brand}</h1>
+        <Component {...props} />
+      </div>
+    );
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  return NewComponent;
+};
 
-  console.log("product data ", ProductData);
-  return (
-    <section className="bg-gray-50 py-8 antialiased dark:bg-gray-900 md:py-12">
-      <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
-        <div className="mb-4 grid gap-4 sm:grid-cols-2 md:mb-8 lg:grid-cols-3 xl:grid-cols-4">
-          {ProductData.map((items, index) => {
-            return (
-              <div key={items.id}>
-                <ProductCard
-                  productId={items.id}
-                  product_name={items.title}
-                  price={items.price}
-                  offer={items.discountPercentage}
-                  rating={items.rating}
-                  rating_count={items.stock}
-                  product_image={items.thumbnail}
-                />
-              </div>
-            );
-          })}
+export const ProductSection = () => {
+  const { ProductData, isLoading } = useFetchProductData();
+
+  const ProductNewUI = ProductCardWithBrand(ProductCard);
+
+  if (isLoading) {
+    return <h1>Loading...</h1>;
+  } else {
+    return (
+      <section className="bg-gray-50 py-8 antialiased dark:bg-gray-900 md:py-12">
+        <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
+          <div className="mb-4 grid gap-4 sm:grid-cols-2 md:mb-8 lg:grid-cols-3 xl:grid-cols-4">
+            {ProductData.map((items, index) => {
+              return (
+                <div key={items.id}>
+                  <ProductNewUI
+                    brand={items.brand}
+                    productId={items.id}
+                    product_name={items.title}
+                    price={items.price}
+                    offer={items.discountPercentage}
+                    rating={items.rating}
+                    rating_count={items.stock}
+                    product_image={items.thumbnail}
+                  />
+                </div>
+              );
+            })}
+          </div>
         </div>
-      </div>
-    </section>
-  );
+      </section>
+    );
+  }
 };
 
 // Static function
